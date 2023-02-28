@@ -1,3 +1,3 @@
 # Jogo-do-quadradinho
-Jogo em JavaScript
+Jogo em JavaScript,
 segundo semestre 
