@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jogo em JavaScript</title>
+	<style>
+		#jogo {
+			width: 400px;
+			height: 400px;
+			position: relative;
+			background-color: #eee;
+		}
+		#quadrado {
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 175px;
+			left: 175px;
+			background-color: red;
+		}
+		#objetivo {
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 75px;
+			left: 75px;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<h1>Jogo em JavaScript</h1>
+	<div id="jogo">
+		<div id="quadrado"></div>
+		<div id="objetivo"></div>
+	</div>
+
+	<script>
+		var quadrado = document.getElementById("quadrado");
+		var objetivo = document.getElementById("objetivo");
+
+		document.addEventListener("keydown", function(event) {
+			if (event.key == "ArrowUp") {
+				moveQuadrado(0, -10);
+			} else if (event.key == "ArrowDown") {
+				moveQuadrado(0, 10);
+			} else if (event.key == "ArrowLeft") {
+				moveQuadrado(-10, 0);
+			} else if (event.key == "ArrowRight") {
+				moveQuadrado(10, 0);
+			}
+		});
+
+		function moveQuadrado(x, y) {
+			var atualX = parseInt(window.getComputedStyle(quadrado).left);
+			var atualY = parseInt(window.getComputedStyle(quadrado).top);
+
+			var novoX = atualX + x;
+			var novoY = atualY + y;
+
+			if (novoX < 0 || novoY < 0 || novoX > 350 || novoY > 350) {
+				return;
+			}
+
+			quadrado.style.left = novoX + "px";
+			quadrado.style.top = novoY + "px";
+
+			if (colisao()) {
+				alert("Você venceu!");
+			}
+		}
+
+		function colisao() {
+			var quadradoX = parseInt(window.getComputedStyle(quadrado).left);
+			var quadradoY = parseInt(window.getComputedStyle(quadrado).top);
+
+			var objetivoX = parseInt(window.getComputedStyle(objetivo).left);
+			var objetivoY = parseInt(window.getComputedStyle(objetivo).top);
+
+			if (quadradoX == objetivoX && quadradoY == objetivoY) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>
